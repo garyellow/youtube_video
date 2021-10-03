@@ -6,7 +6,9 @@ from pytube import exceptions
 
 download_dir = 'download'
 
-print('This is YouTube video downloader~~\n')
+print('This is YouTube video downloader~~')
+print('You can download video or audio from YouTube')
+print('Prohibited for commercial use\n')
 print('Default storage location for files is "download" folder')
 print('Press enter key to continue, other keys to change the storage location...')
 
