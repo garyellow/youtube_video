@@ -9,7 +9,7 @@ download_dir = 'download'
 print('This is YouTube video downloader~~')
 print('You can download video or audio from YouTube')
 print('Prohibited for commercial use\n')
-print('Default storage location for files is "download" folder')
+print('Default storage location for files is "download" folder near this exe file')
 print('Press enter to continue, other keys to change the storage location...')
 
 if ord(msvcrt.getch()) != 13:
