@@ -1,4 +1,5 @@
 *.ini
+*.mp4
 /__pycache__
 /build
 /download
