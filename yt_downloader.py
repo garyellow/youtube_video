@@ -10,7 +10,7 @@ print('This is YouTube video downloader~~')
 print('You can download video or audio from YouTube')
 print('Prohibited for commercial use\n')
 print('Default storage location for files is "download" folder')
-print('Press enter key to continue, other keys to change the storage location...')
+print('Press enter to continue, other keys to change the storage location...')
 
 if ord(msvcrt.getch()) != 13:
     while True:
@@ -77,7 +77,7 @@ while True:
                 print('\nUnknown exception\n')
                 break
             else:
-                print('\n\nVideo name：' + yt.title)
+                print('\nVideo name：' + yt.title)
                 print('Uploader：' + yt.author)
                 print('\nVideo download successfully~\n')
                 break
