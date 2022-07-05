@@ -8,7 +8,7 @@ download_dir = 'download'
 
 print('This is YouTube video downloader~~')
 print('You can download video or audio from YouTube')
-print('Prohibited for commercial use\n')
+print('Prohibited for commercial!!!\n')
 print('Default storage location for files is "download" folder near this exe file')
 print('Press enter to continue, other keys to change the storage location...')
 
@@ -21,67 +21,46 @@ if ord(msvcrt.getch()) != 13:
 while True:
     URL = input('\nEnter the URL of the video\n>> ')
     if len(URL) == 0:
-        print('This is required!')
+        print('This item is required!')
         continue
 
     try:
-        yt: YouTube = YouTube(URL)
+        yt = YouTube(URL)
     except exceptions.RegexMatchError:
         print('URL is fault, please check it')
         continue
 
-    while True:
-        download_kind = input('\nOnly audio? (y/n)\n>> ')
-        print('\nStart download, please wait for a short time~~')
+    download_kind = input('\nVideo or Audio? (v/a)\n>> ')
+    while len(download_kind) != 1 or ['a', 'A', 'v', 'V'].count(download_kind) == 0:
+        download_kind = input('\nVideo or Audio? (v/a)\n>> ')
 
-        if download_kind == 'y' or download_kind == 'Y':
-            try:
-                yt.streams.get_audio_only().download(download_dir)
-            except error.URLError:
-                print('\nUnable to connect to the internet\n')
-                break
-            except exceptions.AgeRestrictedError:
-                print('\nUnable to download age-restricted videos\n')
-                break
-            except exceptions.LiveStreamError:
-                print('\nUnable to download the video in the live\n')
-                break
-            except exceptions.MembersOnly:
-                print('\nUnable to download ' + yt.author + '\'s member-only videos\n')
-                break
-            except exceptions:
-                print('\nUnknown exception\n')
-                break
-            else:
-                print('\n\nVideo name：' + yt.title)
-                print('Uploader：' + yt.author)
-                print('\nAudio file downloaded successfully~\n\n')
-                break
+    print('\nStart download, please wait for a short time~~\n')
 
-        if download_kind == 'n' or download_kind == 'N':
-            try:
-                yt.streams.get_highest_resolution().download(download_dir)
-            except error.URLError:
-                print('\nUnable to connect to the internet\n')
-                break
-            except exceptions.AgeRestrictedError:
-                print('\nUnable to download age-restricted videos\n')
-                break
-            except exceptions.LiveStreamError:
-                print('\nUnable to download the video in the live\n')
-                break
-            except exceptions.MembersOnly:
-                print('\nUnable to download ' + yt.author + '\'s member-only videos\n')
-                break
-            except exceptions:
-                print('\nUnknown exception\n')
-                break
-            else:
-                print('\nVideo name：' + yt.title)
-                print('Uploader：' + yt.author)
-                print('\nVideo download successfully~\n')
-                break
+    try:
+        if download_kind == 'a' or download_kind == 'A':
+            yt.streams.get_audio_only().download(download_dir)
+        if download_kind == 'v' or download_kind == 'V':
+            yt.streams.get_highest_resolution().download(download_dir)
+    except error.URLError:
+        print('\nUnable to connect to the internet\n')
+    except exceptions.AgeRestrictedError:
+        print('\nUnable to download age-restricted videos\n')
+    except exceptions.LiveStreamError:
+        print('\nUnable to download the video in the live\n')
+    except exceptions.MembersOnly:
+        print('\nUnable to download ' + yt.author + '\'s member-only videos\n')
+    except exceptions:
+        print('\nUnknown exception\n')
+    else:
+        print('--------------------------------------------------')
+        print('Video name：' + yt.title)
+        print('Uploader：' + yt.author)
+        if download_kind == 'a' or download_kind == 'A':
+            print('Audio downloaded successfully~')
+        if download_kind == 'v' or download_kind == 'V':
+            print('Video download successfully~')
+        print('--------------------------------------------------')
 
-    print('Press Enter to download other videos, other keys to close...')
+    print('\nPress Enter to download other videos, other keys to close...')
     if ord(msvcrt.getch()) != 13:
         break
